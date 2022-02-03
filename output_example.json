@@ -1,0 +1,14 @@
+{
+  "pm10 env": 7,
+  "pm100 env": 10, 
+  "pm100 standard": 10, 
+  "particles 03um": 1326, 
+  "pm25 standard": 10, 
+  "particles 10um": 46, 
+  "pm10 standard": 7, 
+  "pm25 env": 10, 
+  "particles 05um": 371, 
+  "particles 25um": 4, 
+  "particles 100um": 0, 
+  "particles 50um": 0
+}
