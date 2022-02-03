@@ -21,29 +21,33 @@ oled = adafruit_ssd1306.SSD1306_I2C(128, 64, i2c)
 # Init PM2.5 sensor over UART
 pm25 = PM25_UART(uart, reset_pin)
 
+def oled_waiting(wait_seconds):
+    counter = wait_seconds /5
+    place = 4
+    for _ in range(counter):
+        print(place)
+        oled.text('.', place, 24 , 1)
+        oled.show()
+        place = place + 6
+        time.sleep(5)
+
 # Wait while sensor initializes. 30 seconds works
 oled.fill(0)
 oled.text('Found PM2.5 sensor,', 4,4,1)
 oled.text('initializing.......', 4,14,1)
 oled.show()
-time.sleep(5)
-oled.text('.', 4,24,1)
-oled.show()
-time.sleep(5)
-oled.text('.', 10,24,1)
-oled.show()
-time.sleep(5)
-oled.text('.', 16,24,1)
-oled.show()
-time.sleep(5)
-oled.text('.', 22,24,1)
-oled.show()
-time.sleep(10)
+oled_waiting(5)
+
+
 
 while True:
     try:
         aqdata = pm25.read()
-        # print(aqdata)
+        if aqdata["particles 03um"] == 0:
+            oled.fill(0)
+            oled.text("ain't shit here, Hoss...",4,4,1)
+            oled.show()
+        print(aqdata)
     except RuntimeError:
         oled.fill(0)
         oled.text('mistakes were made...', 4,4,1)
